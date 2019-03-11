@@ -1,0 +1,54 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <!--DOCUMENT TYPE html-->
+    <input id="red" type="range" min="0" max="255" stop="I" value="0">
+    <input id="green" type="range" min="0" max="255" stop="I" value="0">
+    <input id="blue" type="range" min="0" max="255" stop="I" value="0">
+    <!-- pubnub lib-->
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.6.js"></script>
+
+    <!-- pubnub loggin details-->
+    <script>
+        var pubnub = new PubNub({
+            publish_key: 'pub-c-2f4207eb-7e62-43c2-b7a1-2c001b09c8ec',
+            subscribe_key: 'sub-c-10b93e0e-f2fd-11e8-adf7-5a5b31762c0f'
+        });
+        var channel = 'ifka-channel';
+        var brightness = [0, 0, 0];
+        var red = document.getElementById('red');
+        var green = document.getElementById('green');
+        var blue = document.getElementById('blue');
+
+        red.addEventListener('change', function(e) {
+            brightness[0] = +this.value;
+            publishUpdate(["r", brightness[0]]);
+        }, false);
+        green.addEventListener('change', function(e) {
+            brightness[0] = +this.value;
+            publishUpdate(["g", brightness[0]]);
+        }, false);
+
+        blue.addEventListener('change', function(e) {
+            brightness[0] = +this.value;
+            publishUpdate(["b", brightness[0]]);
+        }, false);
+
+        function publishUpdate(data) {
+            console.log(data);
+            pubnub.publish({
+                channel: 'ifka-channel',
+                message: data
+
+
+            });
+        }
+    </script>
+</body>
+
+</html>
