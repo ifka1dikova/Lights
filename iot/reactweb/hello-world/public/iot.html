@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>VOICE CONTROLLED LIGHTS - IOT</title>
+  </head>
+  
+    <div id="root"></div>
+    
+     <div class="header">
+  <b><a>VOICE CONTROLLED LIGHTS - INTERNET OF THINGS PROJECT 2019</a></b>
+    </div>
+    
+    <style>
+
+    body {
+  margin: 0;
+}
+
+/* header */
+.header {
+  background-color: WHITE;
+  padding: 25px;
+  text-align: center;
+}   
+        .topnav {
+            overflow: hidden;}
+        
+        h4 {
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+        
+        div {
+  text-align: justify;
+  text-justify: inter-word;
+}
+        
+</style>
+   
+   <nav class="navbar navbar-expand-sm bg-warning navbar-dark fixed top"> <!--CHANGES THE NAVIGATION BAR TO A YELLOW COLOUR AND FIXED TO THE TOP OF THE SCREEN-->
+
+          
+       
+       <a class="navbar-brand" href="index.html">
+    <img src="light.png" alt="logo" style="width:40px;">
+  </a>
+        
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+       <b> <a class="nav-link" href="index.html">HOME</a></b>
+      </li>
+        
+        
+         <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">   
+       <li class="nav-item">
+        <b><a class="nav-link" href="livedata.html">LIVE DATA</a></b>
+      </li>  
+    </ul>
+
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+          <b><a class="nav-link" href="iot.html">IOT PROJECT</a></b>
+      </li> 
+        
+      </ul></div></div></nav>
+    <p></p>
+    
+    <center><img src="light.png" alt="light" width="100" height="100"></center>
+      
+      <p></p>
+    
+    
+      <center>
+      <img src="room1.jpg" alt="room" width="310" height="225">
+      <img src="room2.jpg" alt="room2" width="310" height="225">
+      <img src="room3.JPG" alt="room3" width="310" height="225">
+ </center>
+      
+  </div>
+</div>
+    
+    <div class="footer">
+  <b><p>© VOICE CONTROLLED LIGHTS 2019</p></b>
+</div>
+
+<body>
+    
+    
+    <style>
+        .footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: black;
+  text-align: center;
+}     
+    </style> 
+        
+      <style>
+      body {
+  background-color: #FFFF00;
+</style>
+
+  </body>
+
+<body>
+    <link rel="stylesheet" type="text/css" href="iot.css">
+
+    <!--DOCUMENT TYPE html-->
+    <input id="red" type="range" min="0" max="255" stop="I" value="0">
+    <input id="green" type="range" min="0" max="255" stop="I" value="0">
+    <input id="blue" type="range" min="0" max="255" stop="I" value="0">
+    <!-- pubnub lib-->
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.6.js"></script>
+
+    <!-- pubnub login details-->
+    <script>
+        var pubnub = new PubNub({
+            publish_key: 'pub-c-2f4207eb-7e62-43c2-b7a1-2c001b09c8ec',
+            subscribe_key: 'sub-c-10b93e0e-f2fd-11e8-adf7-5a5b31762c0f'
+        });
+        var channel = 'ifka-channel';
+        var brightness = [0, 0, 0];
+        var red = document.getElementById('red');
+        var green = document.getElementById('green');
+        var blue = document.getElementById('blue');
+        red.addEventListener('change', function(e) {
+            brightness[0] = +this.value;
+            publishUpdate(["r", brightness[0]]);
+        }, false);
+        green.addEventListener('change', function(e) {
+            brightness[0] = +this.value;
+            publishUpdate(["g", brightness[0]]);
+        }, false);
+        blue.addEventListener('change', function(e) {
+            brightness[0] = +this.value;
+            publishUpdate(["b", brightness[0]]);
+        }, false);
+        function publishUpdate(data) {
+            console.log(data);
+            pubnub.publish({
+                channel: 'ifka-channel',
+                message: data
+            });
+        }
+    </script>
+</body>
+
+
+
+</body>
+
+
+
+
+
+</html>

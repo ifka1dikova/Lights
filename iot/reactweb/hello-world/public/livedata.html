@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    
+    
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>VOICE CONTROLLED LIGHTS - IOT</title>
+  </head>
+  
+    <div id="root"></div>
+    
+     <div class="header">
+  <b><a>VOICE CONTROLLED LIGHTS - INTERNET OF THINGS PROJECT 2019</a></b>
+    </div>
+    
+    <style>
+
+    body {
+  margin: 0;
+}
+
+/* header */
+.header {
+  background-color: WHITE;
+  padding: 25px;
+  text-align: center;
+}   
+        .topnav {
+            overflow: hidden;}
+        
+        h4 {
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+        
+        div {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+img {
+  border-radius: 80%;
+};
+        
+</style>
+   
+   <nav class="navbar navbar-expand-sm bg-warning navbar-dark fixed top"> <!--CHANGES THE NAVIGATION BAR TO A YELLOW COLOUR AND FIXED TO THE TOP OF THE SCREEN-->
+
+          
+       
+       <a class="navbar-brand" href="index.html">
+    <img src="light.png" alt="logo" style="width:40px;">
+  </a>
+        
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+       <b> <a class="nav-link" href="index.html">HOME</a></b>
+      </li>
+        
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+       <li class="nav-item">
+        <b><a class="nav-link" href="livedata.html">LIVE DATA</a></b>
+      </li>  
+    </ul>
+
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+          <b><a class="nav-link" href="iot.html">IOT PROJECT</a></b>
+      </li> 
+        
+      </ul></div></div></nav>
+    <p></p>
+    
+    <center><img src="light.png" alt="light" width="100" height="100"></center>
+    
+    
+  
+  
+</div>
+      
+      <script type="text/javascript" src="https://pubnub.github.io/eon/v/eon/1.0.0/eon.js"></script>
+<link type="text/css" rel="stylesheet" href="https://pubnub.github.io/eon/v/eon/1.0.0/eon.css" />
+<div id="chart"></div>
+<script type="text/javascript">
+var __eon_pubnub = new PubNub({
+  subscribeKey: "sub-c-bd9ab0d6-6e02-11e5-8d3b-0619f8945a4f"
+});
+var __eon_cols = ["Austin","New York","San Francisco","Portland"]; 
+var __eon_labels = {}; 
+chart = eon.chart({
+  pubnub: __eon_pubnub,
+  channels: ["test-channel-0.09720460963878863"],
+  history: true,
+  flow: true,
+  rate: 1000,
+  limit: 5,
+  generate: {
+    bindto: "#chart",
+    data: {
+      colors: {"Austin":"#D70060","New York":"#E54028","San Francisco":"#F18D05","Portland":"#113F8C"},
+      type: "line"
+    },
+    transition: {
+      duration: 250
+    },
+    axis: {
+      x: {
+        label: ""
+      },
+      y: {
+        label: ""
+      }
+    },
+    grid: {
+      x: {
+        show: false 
+      },
+      y: {
+        show: false 
+      }
+    },
+    tooltip: {
+     show: true
+    },
+    point: {
+      show: true
+    }
+  },
+  transform: function(message) {
+    var message = eon.c.flatten(message.eon);
+    var o = {};
+    for(index in message) {
+      if(__eon_cols.indexOf(index) > -1){
+        o[__eon_labels[index] || index] = message[index];
+      }
+    }
+    return {
+      eon: o
+    };
+  }
+});
+</script>
+    
+    <div class="footer">
+  <b><p>© VOICE CONTROLLED LIGHTS 2019</p></b>
+</div>
+       
+       
+
+<body>
+    
+
+    <br></br>
+    
+    <style>
+        
+          /* Style the footer */
+.footer {
+  background-color: white;
+  padding: 25px;
+    text-align: center;}
+    
+    /* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 15px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width:600px) {
+  .column {
+    width: 50%;
+  }
+
+        
+        </style>
+        
+        
+        
+      <style>
+
+      body {
+  background-color: #FFFF00;
+</style>
+
+  </body>
+</html>
