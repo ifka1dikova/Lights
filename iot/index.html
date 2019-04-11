@@ -7,7 +7,7 @@
 <body>
 
     <!--DOCUMENT TYPE html-->
-    <input id="red" type="range" min="0" max="255" stop="I" value="0">
+    <input id="red" type="range" min="0" max="255" stop="I" value="0">   <!-- input the colour with min and max values -->
     <input id="green" type="range" min="0" max="255" stop="I" value="0">
     <input id="blue" type="range" min="0" max="255" stop="I" value="0">
     <!-- pubnub lib-->
@@ -16,30 +16,30 @@
     <!-- pubnub loggin details-->
     <script>
         var pubnub = new PubNub({
-            publish_key: 'pub-c-2f4207eb-7e62-43c2-b7a1-2c001b09c8ec',
-            subscribe_key: 'sub-c-10b93e0e-f2fd-11e8-adf7-5a5b31762c0f'
+            publish_key: 'pub-c-2f4207eb-7e62-43c2-b7a1-2c001b09c8ec', // the pubNub publish key 
+            subscribe_key: 'sub-c-10b93e0e-f2fd-11e8-adf7-5a5b31762c0f'  // the pubNub subscribe key 
         });
-        var channel = 'ifka-channel';
-        var brightness = [0, 0, 0];
-        var red = document.getElementById('red');
+        var channel = 'ifka-channel';  // the pubNub channel 
+        var brightness = [0, 0, 0];    // setting the brightness values starting from 0 
+        var red = document.getElementById('red');  // calling the colours named in the Arduino code file  
         var green = document.getElementById('green');
         var blue = document.getElementById('blue');
 
-        red.addEventListener('change', function(e) {
-            brightness[0] = +this.value;
+        red.addEventListener('change', function(e) { // adding event listener  to change the brightness value depending on the received updated data (input from the user)
+            brightness[0] = +this.value;   // for the red colour   
             publishUpdate(["r", brightness[0]]);
         }, false);
-        green.addEventListener('change', function(e) {
-            brightness[0] = +this.value;
+        green.addEventListener('change', function(e) { // adding event listener  to change the brightness value depending on the received updated data (input from the user)
+            brightness[0] = +this.value;     // for the green colour  
             publishUpdate(["g", brightness[0]]);
         }, false);
 
-        blue.addEventListener('change', function(e) {
-            brightness[0] = +this.value;
+        blue.addEventListener('change', function(e) { // adding event listener  to change the brightness value depending on the received updated data (input from the user)
+            brightness[0] = +this.value;  // for the blue  colour  
             publishUpdate(["b", brightness[0]]);
         }, false);
 
-        function publishUpdate(data) {
+        function publishUpdate(data) {   // function for updating the data  from the Ifka channel 
             console.log(data);
             pubnub.publish({
                 channel: 'ifka-channel',
